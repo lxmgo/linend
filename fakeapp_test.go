@@ -58,7 +58,7 @@ func (c Static) Serve(prefix, filepath string) Result {
 }
 
 func startFakeBookingApp() {
-	Init("prod", "github.com/revel/revel/testdata", "")
+	Init("prod", "github.com/linewin/revel/testdata", "")
 
 	// Disable logging.
 	TRACE = log.New(ioutil.Discard, "", 0)

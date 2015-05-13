@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	REVEL_IMPORT_PATH = "github.com/revel/revel"
+	REVEL_IMPORT_PATH = "github.com/linewin/revel"
 )
 
 type revelLogs struct {
@@ -29,13 +29,14 @@ func (r *revelLogs) Write(p []byte) (n int, err error) {
 
 var (
 	// App details
-	AppName    string // e.g. "sample"
-	AppRoot    string // e.g. "/app1"
-	BasePath   string // e.g. "/Users/robfig/gocode/src/corp/sample"
-	AppPath    string // e.g. "/Users/robfig/gocode/src/corp/sample/app"
-	ViewsPath  string // e.g. "/Users/robfig/gocode/src/corp/sample/app/views"
-	ImportPath string // e.g. "corp/sample"
-	SourcePath string // e.g. "/Users/robfig/gocode/src"
+	AppName      string // e.g. "sample"
+	AppRoot      string // e.g. "/app1"
+	BasePath     string // e.g. "/Users/robfig/gocode/src/corp/sample"
+	AppPath      string // e.g. "/Users/robfig/gocode/src/corp/sample/app"
+	HandlersPath string // e.g. "/Users/robfig/gocode/src/corp/sample/thrift/handlers"
+	ViewsPath    string // e.g. "/Users/robfig/gocode/src/corp/sample/app/views"
+	ImportPath   string // e.g. "corp/sample"
+	SourcePath   string // e.g. "/Users/robfig/gocode/src"
 
 	Config  *MergedConfig
 	RunMode string // Application-defined (by default, "dev" or "prod")
@@ -63,7 +64,10 @@ var (
 	HttpSsl     bool   // e.g. true if using ssl
 	HttpSslCert string // e.g. "/path/to/cert.pem"
 	HttpSslKey  string // e.g. "/path/to/key.pem"
-
+	
+	ThriftPort int
+	ThriftAddr string
+	ThriftSecure bool
 	// All cookies dropped by the framework begin with this prefix.
 	CookiePrefix string
 	// Cookie domain
@@ -133,9 +137,10 @@ func Init(mode, importPath, srcPath string) {
 	RevelPath = path.Join(revelSourcePath, filepath.FromSlash(REVEL_IMPORT_PATH))
 	BasePath = path.Join(SourcePath, filepath.FromSlash(importPath))
 	AppPath = path.Join(BasePath, "app")
+	HandlersPath = path.Join(BasePath, "thrift/handlers")
 	ViewsPath = path.Join(AppPath, "views")
 
-	CodePaths = []string{AppPath}
+	CodePaths = []string{AppPath,HandlersPath}
 
 	ConfPaths = []string{
 		path.Join(BasePath, "conf"),
@@ -179,6 +184,10 @@ func Init(mode, importPath, srcPath string) {
 		}
 	}
 
+	ThriftPort = Config.IntDefault("thrift.port", 9090)
+	ThriftAddr = Config.StringDefault("thrift.addr", "")
+	ThriftSecure = Config.BoolDefault("thrift.secure", false)
+	
 	AppName = Config.StringDefault("app.name", "(not set)")
 	AppRoot = Config.StringDefault("app.root", "")
 	CookiePrefix = Config.StringDefault("cookie.prefix", "REVEL")
@@ -330,7 +339,7 @@ func addModule(name, importPath, modulePath string) {
 
 	// Hack: There is presently no way for the testrunner module to add the
 	// "test" subdirectory to the CodePaths.  So this does it instead.
-	if importPath == Config.StringDefault("module.testrunner", "github.com/revel/modules/testrunner") {
+	if importPath == Config.StringDefault("module.testrunner", "github.com/linewin/modules/testrunner") {
 		CodePaths = append(CodePaths, path.Join(BasePath, "tests"))
 	}
 }
