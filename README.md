@@ -35,6 +35,7 @@ The Project will be generated at $GOPATH/src/xxx.com/yyy/zzz
 这将会在$GOPATH/src/xxx.com/yyy/zzz目录下生成项目
 
 ###Run project/运行项目
+>revel thrift xxx.com/yyy/zzz
 >revel run xxx.com/yyy/zzz
 
 Visit http://localhost:9000 for web view, same as in revel.
