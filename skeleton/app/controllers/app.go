@@ -1,6 +1,6 @@
 package controllers
 
-import "github.com/linewin/revel"
+import "github.com/linewin/linend"
 
 type App struct {
 	*revel.Controller

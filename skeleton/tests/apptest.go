@@ -1,6 +1,6 @@
 package tests
 
-import "github.com/linewin/revel/testing"
+import "github.com/linewin/linend/testing"
 
 type AppTest struct {
 	testing.TestSuite

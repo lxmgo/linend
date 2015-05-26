@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"github.com/linewin/revel"
+	"github.com/linewin/linend"
 	"net"
 	"testing"
 	"time"

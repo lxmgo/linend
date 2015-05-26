@@ -1,6 +1,6 @@
 package app
 
-import "github.com/linewin/revel"
+import "github.com/linewin/linend"
 
 func init() {
 	// Filters is the default set of global filters.

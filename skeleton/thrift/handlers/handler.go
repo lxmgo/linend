@@ -20,9 +20,9 @@ package handlers
  */
 
 import (
-	"hello/thrift/gen/shared"
-	"hello/thrift/gen/tutorial"
-	"github.com/linewin/revel"
+	"{{$importPath}}/thrift/gen/shared"
+	"{{$importPath}}/thrift/gen/tutorial"
+	"github.com/linewin/linend"
 	"strconv"
 )
 

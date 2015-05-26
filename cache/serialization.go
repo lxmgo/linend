@@ -3,7 +3,7 @@ package cache
 import (
 	"bytes"
 	"encoding/gob"
-	"github.com/linewin/revel"
+	"github.com/linewin/linend"
 	"reflect"
 	"strconv"
 )

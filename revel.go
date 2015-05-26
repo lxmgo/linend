@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	REVEL_IMPORT_PATH = "github.com/linewin/revel"
+	REVEL_IMPORT_PATH = "github.com/linewin/linend"
 )
 
 type revelLogs struct {

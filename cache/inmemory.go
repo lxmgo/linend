@@ -2,7 +2,7 @@ package cache
 
 import (
 	"fmt"
-	"github.com/linewin/revel"
+	"github.com/linewin/linend"
 	"github.com/robfig/go-cache"
 	"reflect"
 	"time"
